@@ -21,9 +21,9 @@ public class Homework2 {
         System.out.println("3. " + money + " " + rub);
 
         //4. Задать три числа – день, месяц, год. Вывести на экран в виде трех чисел дату следующего дня.
-        int d = 31;
-        int m = 12;
-        int y = 2022;
+        int d = 28;
+        int m = 2;
+        int y = 2020;
         if (d < 1 || d > 31 || m < 1 || m > 12) {
             System.out.println("4. Некорректная дата");
         } else {
@@ -106,34 +106,19 @@ public class Homework2 {
 
     // Определение новой даты
     public static String nextDay(int day, int month, int year) {
+        String next = "4. Следующий день: ";
+        String incorrect = "4. Некорректная дата";
         switch (month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-                if (day < 31) {
-                    day++;
-                    System.out.print("4. Следующий день: ");
-                } else if (day == 31) {
-                    day = 1;
-                    month++;
-                    System.out.print("4. Следующий день: ");
-                } else {
-                    System.out.println("4. Некорректная дата");
-                }
-                break;
             case 2:
                 if ((day < 28) || (day == 28 && year % 4 == 0)) {
                     day++;
-                    System.out.print("4. Следующий день: ");
+                    System.out.print(next);
                 } else if ((day == 28 && year % 4 != 0) || (day == 29 && year % 4 == 0)) {
                     day = 1;
                     month++;
-                    System.out.print("4. Следующий день: ");
+                    System.out.print(next);
                 } else {
-                    System.out.println("4. Некорректная дата");
+                    System.out.println(incorrect);
                 }
                 break;
             case 4:
@@ -142,30 +127,39 @@ public class Homework2 {
             case 11:
                 if (day < 30) {
                     day++;
-                    System.out.print("4. Следующий день: ");
+                    System.out.print(next);
                 } else if (day == 30) {
                     day = 1;
                     month++;
-                    System.out.print("4. Следующий день: ");
+                    System.out.print(next);
                 } else {
-                    System.out.println("4. Некорректная дата");
+                    System.out.println(incorrect);
                 }
                 break;
             case 12:
                 if (day < 31) {
                     day++;
-                    System.out.print("4. Следующий день: ");
+                    System.out.print(next);
                 } else if (day == 31) {
                     day = 1;
                     month = 1;
                     year++;
-                    System.out.print("4. Следующий день: ");
+                    System.out.print(next);
                 } else {
-                    System.out.println("4. Некорректная дата");
+                    System.out.println(incorrect);
                 }
                 break;
             default:
-                System.out.println("4. Некорректная дата");
+                if (day < 31) {
+                    day++;
+                    System.out.print(next);
+                } else if (day == 31) {
+                    day = 1;
+                    month++;
+                    System.out.print(next);
+                } else {
+                    System.out.println(incorrect);
+                }
         }
         return day + "." + month + "." + year;
     }
