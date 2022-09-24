@@ -3,38 +3,48 @@ public class Homework3 {
 
         //1. Вычислить факториал целых чисел от 0 до 10 с помощью цикла while для каждого.
         System.out.println("Task 1");
-        findFactorial();
+        int at1 = 0;
+        int bt1 = 10;
+        findFactorial(at1,bt1);
 
         //2. Вычислить произведение чисел от 1 до 25 с помощью цикла do while.
         System.out.println("Task 2");
-        multiplication();
+        int at2 = 1;
+        int bt2 = 25;
+        multiplication(at2,bt2);
 
         //3. Посчитать сумму цифр числа 7893823445 с помощью цикла do while.
         System.out.println("Task 3");
-        multiplOfDigits();
+        long at3 = 78938223445L;
+        multiplOfDigits(at3);
 
         //4. Найти среди чисел от 50 до 70 второе простое число (число называют простым,
         // если оно делится без остатка только на 1 и себя) и завершить цикл с использованием break.
 
         System.out.println("Task 4");
-        findSecondPrime();
+        int at4 = 50;
+        int bt4 = 70;
+        findSecondPrime(at4,bt4);
 
         //5. Для целых чисел, которые делятся на 7 в диапазоне от 1 до 100, вывести на экран строку “Hope!”.
         System.out.println("Task 5");
-        hopeFor7();
+        int at5 = 1;
+        int bt5 = 100;
+        int ct5 = 7;
+        hopeFor7(at5,bt5,ct5);
 
         //6. Задать произвольное целое число и вывести его в бухгалтерском формате, то есть, начиная справа,
         // каждые три позиции отделяются пробелом. Например, число 20023143 должно быть выведено как 20 023 143.
         System.out.println("Task 6");
-        accountFormat();
+        long at6 = -6500398435786641137L;
+        accountFormat(at6);
     }
 
 
     //1. Вычислить факториал целых чисел от 0 до 10 с помощью цикла while для каждого.
-    public static void findFactorial() {
-        int number = 0;
+    public static void findFactorial(int number, int toNumber) {
         int i = 0;
-        while (number <= 10) {
+        while (number <= toNumber) {
             int mult = 1;
             while (i <= number) {
                 mult *= i;
@@ -48,20 +58,18 @@ public class Homework3 {
     }
 
     //2. Вычислить произведение чисел от 1 до 25 с помощью цикла do while.
-    public static void multiplication() {
-        int i = 1;
+    public static void multiplication(int i,int toNumber) {
         long mult = 1;
         do {
             mult *= i;
             i++;
         }
-        while (i <= 9);
+        while (i <= toNumber);
         System.out.println(mult);
     }
 
     //3. Посчитать сумму цифр числа 7893823445 с помощью цикла do while.
-    public static void multiplOfDigits() {
-        long number = 78938223445L;
+    public static void multiplOfDigits(long number) {
         int mult = 1;
         do {
             mult *= number % 10;
@@ -72,10 +80,9 @@ public class Homework3 {
 
     //4. Найти среди чисел от 50 до 70 второе простое число (число называют простым,
     // если оно делится без остатка только на 1 и себя) и завершить цикл с использованием break.
-    public static void findSecondPrime() {
-        int number = 50;
+    public static void findSecondPrime(int number,int toNumber) {
         int count = 0;
-        while (number <= 70) {
+        while (number <= toNumber) {
             for (int i = 2; i <= number - 1; i++) {
                 if (number % i == 0) {
                     break;
@@ -91,9 +98,9 @@ public class Homework3 {
     }
 
     //5. Для целых чисел, которые делятся на 7 в диапазоне от 1 до 100, вывести на экран строку “Hope!”.
-    public static void hopeFor7() {
-        for (int i = 1; i <= 100; i++) {
-            if (i % 7 == 0) {
+    public static void hopeFor7(int fromNumber, int toNumber, int x) {
+        for (int i = fromNumber; i <= toNumber; i++) {
+            if (i % x == 0) {
                 System.out.println(i + " - Hope!");
             }
         }
@@ -101,10 +108,9 @@ public class Homework3 {
 
     //6. Задать произвольное целое число и вывести его в бухгалтерском формате, то есть, начиная справа,
     // каждые три позиции отделяются пробелом. Например, число 20023143 должно быть выведено как 20 023 143.
-    public static void accountFormat() {
+    public static void accountFormat(long number) {
         // Проверяем на отрицательность числа. Если число отрицательное, выводим "минус" и переводим число в разряд
         // положительных.
-        long number = -6500398435786641137L;
         if (number < 0) {
             System.out.print("-");
             number = -number;
