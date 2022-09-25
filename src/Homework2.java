@@ -23,7 +23,7 @@ public class Homework2 {
         //4. Задать три числа – день, месяц, год. Вывести на экран в виде трех чисел дату следующего дня.
         int d = 28;
         int m = 2;
-        int y = 2020;
+        int y = 1400;
         if (d < 1 || d > 31 || m < 1 || m > 12) {
             System.out.println("4. Некорректная дата");
         } else {
@@ -110,12 +110,19 @@ public class Homework2 {
         String incorrect = "4. Некорректная дата";
         switch (month) {
             case 2:
-                if ((day < 28) || (day == 28 && year % 4 == 0)) {
+                if ((day < 28) || (day == 28 && year % 4 == 0 && year % 100 != 0)) {
                     day++;
                     System.out.print(next);
                 } else if ((day == 28 && year % 4 != 0) || (day == 29 && year % 4 == 0)) {
                     day = 1;
                     month++;
+                    System.out.print(next);
+                } else if ((day == 28) && (year % 100 == 0) && (year % 400 != 0)) {
+                    day = 1;
+                    month++;
+                    System.out.print(next);
+                } else if ((day == 28) && (year % 100 == 0) && (year % 400 == 0)) {
+                    day++;
                     System.out.print(next);
                 } else {
                     System.out.println(incorrect);
