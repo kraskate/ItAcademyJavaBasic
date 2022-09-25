@@ -61,7 +61,9 @@ public class Homework4 {
 
     public static void showOddPositions(int[] array) {
         for (int i = 0; i < array.length; i++) {
-            if (i % 2 == 0) System.out.println("a[" + i + "] = " + array[i]);
+            if (i % 2 == 0) {
+                System.out.println("a[" + i + "] = " + array[i]);
+            }
         }
     }
 
@@ -166,10 +168,16 @@ public class Homework4 {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 if (i < array.length / 2) {
-                    if (j >= i && j < array.length - i) array[i][j] = 1;
+                    if (j >= i && j < array.length - i) {
+                        array[i][j] = 1;
+                    }
                 } else if (i >= array.length / 2) {
-                    if (j >= (array.length - 1) - i && j <= i) array[i][j] = 1;
-                } else if (i == j) array[i][j] = 1;
+                    if (j >= (array.length - 1) - i && j <= i) {
+                        array[i][j] = 1;
+                    }
+                } else if (i == j) {
+                    array[i][j] = 1;
+                }
             }
         }
 
