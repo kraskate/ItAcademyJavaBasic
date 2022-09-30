@@ -5,13 +5,13 @@ public class Homework3 {
         System.out.println("Task 1");
         int at1 = 0;
         int bt1 = 10;
-        findFactorial(at1,bt1);
+        findFactorial(at1, bt1);
 
         //2. Вычислить произведение чисел от 1 до 25 с помощью цикла do while.
         System.out.println("Task 2");
         int at2 = 1;
         int bt2 = 25;
-        multiplication(at2,bt2);
+        multiplication(at2, bt2);
 
         //3. Посчитать сумму цифр числа 7893823445 с помощью цикла do while.
         System.out.println("Task 3");
@@ -24,28 +24,31 @@ public class Homework3 {
         System.out.println("Task 4");
         int at4 = 50;
         int bt4 = 70;
-        findSecondPrime(at4,bt4);
+        findSecondPrime(at4, bt4);
 
         //5. Для целых чисел, которые делятся на 7 в диапазоне от 1 до 100, вывести на экран строку “Hope!”.
         System.out.println("Task 5");
         int at5 = 1;
         int bt5 = 100;
         int ct5 = 7;
-        hopeFor7(at5,bt5,ct5);
-
+        hopeFor7(at5, bt5, ct5);
+//
         //6. Задать произвольное целое число и вывести его в бухгалтерском формате, то есть, начиная справа,
         // каждые три позиции отделяются пробелом. Например, число 20023143 должно быть выведено как 20 023 143.
         System.out.println("Task 6");
-        long at6 = -6500398435786641137L;
+        long at6 = -1000000000L;
         accountFormat(at6);
     }
 
 
     //1. Вычислить факториал целых чисел от 0 до 10 с помощью цикла while для каждого.
     public static void findFactorial(int number, int toNumber) {
-        int i = 0;
+        int i = 1;
         while (number <= toNumber) {
             int mult = 1;
+            if (number == 0) {
+                mult = 1;
+            }
             while (i <= number) {
                 mult *= i;
                 i++;
@@ -58,7 +61,7 @@ public class Homework3 {
     }
 
     //2. Вычислить произведение чисел от 1 до 25 с помощью цикла do while.
-    public static void multiplication(int i,int toNumber) {
+    public static void multiplication(int i, int toNumber) {
         long mult = 1;
         do {
             mult *= i;
@@ -80,7 +83,7 @@ public class Homework3 {
 
     //4. Найти среди чисел от 50 до 70 второе простое число (число называют простым,
     // если оно делится без остатка только на 1 и себя) и завершить цикл с использованием break.
-    public static void findSecondPrime(int number,int toNumber) {
+    public static void findSecondPrime(int number, int toNumber) {
         int count = 0;
         while (number <= toNumber) {
             for (int i = 2; i <= number - 1; i++) {
@@ -127,7 +130,7 @@ public class Homework3 {
         int firstSpace = countOfDigits % 3; //определяем после какого разряда должен стоять первый пробел
         long digit;
 
-        while (number > 0) {
+        for(int i = countOfDigits; i > 0; i--){
             digit = number / (long) Math.pow(10, (countOfDigits - 1)); //определяем очередную цифру слева направо
             System.out.print(digit);
             space++;
@@ -139,9 +142,6 @@ public class Homework3 {
             number -= digit * (long) Math.pow(10, countOfDigits - 1);  //уменьшаем число, чтобы находить последующие цифры
             countOfDigits--;
         }
-
     }
 
 }
-
-
