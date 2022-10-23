@@ -1,6 +1,7 @@
 package homework11;
 
 import homework11.task6.Person;
+
 import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -8,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class Homework11 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         Random random = new Random();
 
@@ -146,7 +147,11 @@ public class Homework11 {
 
         File task4 = new File("src/homework11/task4.txt");
         task4.delete();
-        task4.createNewFile();
+        try {
+            task4.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try (DataOutputStream dos = new DataOutputStream(new BufferedOutputStream
                 (new FileOutputStream(task4, true)))) {
@@ -203,7 +208,12 @@ public class Homework11 {
         for (int i = 1; i <= 5; i++) {  //создание 5 файлов с удалением предыдущих
             files[i - 1] = new File("D:\\java_course_basic\\ItAcademyJavaBasic2\\src\\homework11\\task5\\task5.1\\Task5.1.1\\" + i + ".txt");
             files[i - 1].delete();
-            files[i - 1].createNewFile();
+            try {
+                files[i - 1].createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
         for (File element : files) {    //заполнение случайными числами
@@ -222,7 +232,11 @@ public class Homework11 {
         // создание итогового файла с удалением предыдущего
         File result = new File("D:\\java_course_basic\\ItAcademyJavaBasic2\\src\\homework11\\task5\\task5.1\\Task5.1.1\\result.txt");
         result.delete();
-        result.createNewFile();
+        try {
+            result.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try (PrintWriter printResult = new PrintWriter(new BufferedWriter(new FileWriter(result, true)))) {
 
@@ -253,14 +267,18 @@ public class Homework11 {
 
         File listOfFiles = new File("D:\\java_course_basic\\ItAcademyJavaBasic2\\src\\homework11\\task5\\task5.1\\Task5.1.1\\list.txt");
         listOfFiles.delete();
-        listOfFiles.createNewFile();
+        try {
+            listOfFiles.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         File directory = new File("D:\\java_course_basic\\ItAcademyJavaBasic2\\src\\homework11\\task5\\task5.1\\Task5.1.1");
         String[] list = directory.list();
 
         try (PrintWriter printList = new PrintWriter(new FileWriter(listOfFiles))) {
 
-            for(String name:list) {
+            for (String name : list) {
                 printList.println(name);
             }
 
@@ -286,15 +304,19 @@ public class Homework11 {
 
         File randomPerson = new File("D:\\java_course_basic\\ItAcademyJavaBasic2\\src\\homework11\\task6\\randomPerson");
         randomPerson.delete();
-        randomPerson.createNewFile();
+        try {
+            randomPerson.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        try (ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream(randomPerson, true))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(randomPerson, true))) {
 
             for (int i = 0; i < 10; i++) {
-                String nameOfPerson = name[random.nextInt(name.length)];
                 String surnameOfPerson = surname[random.nextInt(surname.length)];
+                String nameOfPerson = name[random.nextInt(name.length)];
 
-                Person person = new Person(nameOfPerson, surnameOfPerson, random.nextInt(100));
+                Person person = new Person(surnameOfPerson, nameOfPerson, random.nextInt(100));
 
                 oos.writeObject(person);
             }
@@ -305,11 +327,21 @@ public class Homework11 {
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(randomPerson))) {
 
-            Object o = ois.readObject();
+//            Object o = ois.readObject();
+//            Person p = null;
 
-            do {
+            Object o = null;
+
+            for (int i = 0; i < 10; i++) {
+
+                try {
+                    o = ois.readObject();
+                } catch (EOFException e) {
+                    e.printStackTrace();
+                    break;
+                }
+
                 Person p = null;
-
                 if (o instanceof Person) {
                     p = (Person) o;
                 }
@@ -318,17 +350,50 @@ public class Homework11 {
                     System.out.println(p);
                 }
 
-                o = ois.readObject();
+            }
 
-            } while (o != null);
+//            while (true) {    //выдает ошибку
+//
+//                if (o instanceof Person) {
+//                    p = (Person) o;
+//                }
+//
+//                if (p != null) {
+//                    System.out.println(p);
+//                }
+//
+//                try {
+//                    o = ois.readObject();
+//                } catch (EOFException e) {
+//                    e.printStackTrace();
+//                    break;
+//                }
+//
+//            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+
+//            do {      //выдает ошибку
+//
+//                if (o instanceof Person) {
+//                    p = (Person) o;
+//                }
+//
+//                if (p != null) {
+//                    System.out.println(p);
+//                }
+//                try {
+//                    o = ois.readObject();
+//                } catch (EOFException e) {
+//                    e.printStackTrace();
+//                    break;
+//                }
+//
+//            } while (o != null);
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        System.out.println("lkmdclsmcfs");
     }
 
 

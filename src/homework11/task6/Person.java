@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class Person implements Serializable {
 
-    private String name;
     private String surname;
+    private String name;
     private int age;
 
-    public Person(String name, String surname, int age) {
-        this.name = name;
+    public Person(String surname, String name, int age) {
         this.surname = surname;
+        this.name = name;
         this.age = age;
     }
 
