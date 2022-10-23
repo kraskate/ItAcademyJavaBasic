@@ -1,6 +1,8 @@
 package homework11.task6;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
 
     private String name;
     private String surname;
@@ -10,6 +12,10 @@ public class Person {
         this.name = name;
         this.surname = surname;
         this.age = age;
+    }
+
+    public String toString() {
+        return surname + " " + name + " - " + age + " age old";
     }
 
     public String getName() {

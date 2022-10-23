@@ -1,7 +1,6 @@
 package homework11;
 
 import homework11.task6.Person;
-
 import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -282,12 +281,14 @@ public class Homework11 {
         System.out.println("***** Task 6 *****");
 
         String[] name = {"Margo", "Alex", "Irena", "Olga", "Lion", "Kate", "Daria", "Vlad", "Medea", "Serge"};
-        String[] surname = {"Glavdel", "Krasichenko", "Judenko", "Hurs", "Peince", "Molohovets", "Dajneko",
+        String[] surname = {"Glavdel", "Krasichenko", "Judenko", "Hurs", "Prince", "Molohovets", "Dajneko",
                 "Adamtsevich", "Korol", "Snitko"};
 
-        File randomPerson = new File("D:\\java_course_basic\\ItAcademyJavaBasic2\\src\\homework11\\task6\\file of Person");
+        File randomPerson = new File("D:\\java_course_basic\\ItAcademyJavaBasic2\\src\\homework11\\task6\\randomPerson");
+        randomPerson.delete();
+        randomPerson.createNewFile();
 
-        try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(randomPerson)))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream(randomPerson, true))) {
 
             for (int i = 0; i < 10; i++) {
                 String nameOfPerson = name[random.nextInt(name.length)];
@@ -295,15 +296,39 @@ public class Homework11 {
 
                 Person person = new Person(nameOfPerson, surnameOfPerson, random.nextInt(100));
 
-                printWriter.println(person.getSurname() + " " + person.getName() + " - " + person.getAge() + " ages old");
+                oos.writeObject(person);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Look at the file: " + randomPerson.getAbsolutePath());
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(randomPerson))) {
 
+            Object o = ois.readObject();
+
+            do {
+                Person p = null;
+
+                if (o instanceof Person) {
+                    p = (Person) o;
+                }
+
+                if (p != null) {
+                    System.out.println(p);
+                }
+
+                o = ois.readObject();
+
+            } while (o != null);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("lkmdclsmcfs");
     }
 
 
